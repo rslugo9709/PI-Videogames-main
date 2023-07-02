@@ -5,6 +5,7 @@ const { Router } = require('express');
 const {getVideogames} = require("../controllers/getVideogames");
 const {getVideogameById} = require("../controllers/getVideogameById");
 const {postVideogame} = require("../controllers/postVideogame");
+const {getGenres} = require("../controllers/getGenres")
 const router = Router();
 
 // Configurar los routers
@@ -14,7 +15,7 @@ router.get("/videogames", getVideogames);
 router.get("/videogame/:id", getVideogameById);
 //aqui va la busqueda por query
 router.post("/videogames", postVideogame);
-//router.get("/genres", getGenres);
+router.get("/genres", getGenres);
 
 
 
