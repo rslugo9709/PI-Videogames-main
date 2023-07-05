@@ -3,7 +3,7 @@ require('dotenv').config();
 const {KEY} = process.env;
 const { Sequelize } = require('sequelize');
 const {Videogame, Genres} = require("../db")
-
+const { Op } = require('sequelize');
 async function getVideogameById(req, res){
     const {id} = req.params;
     
@@ -14,7 +14,11 @@ async function getVideogameById(req, res){
     }*/
     try {
         
-        console.log("se ejecuta el getVideoGameByID")
+        //buscamos en la DB
+        console.log(buscarBD(id))
+        
+
+        //buscamos en la api
         const response = (await axios.get(`https://api.rawg.io/api/games/${id}?key=${KEY}`)).data
         if(response){
             const vGame = {
