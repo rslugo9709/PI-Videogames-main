@@ -22,9 +22,27 @@ async function getVideogames(req, res){
         //buscamos en la api
         let url = `https://api.rawg.io/api/games?key=${KEY}&dates=2019-09-01,2019-09-30&platforms=18,1,7`;
         const response = (await axios.get(url)).data.results;
-        gameApi = clearArray(response);
+        //return res.status(200).json(response);
+        //let gameApi = clearArray(response);
+        let gameApi = [];
+        let plataformas= [];
+        //return res.status(200).json(response); 
+        //console.log(response[0].description)
+       response.map((game) =>{
+            let platformas = [game.platforms, game.parent_platforms]
+            .flatMap(platform => platform.map(p => p.platform.name))
+            .filter((name, index, arr) => arr.indexOf(name) === index);
+            gameApi.push({
+                id: game.id,
+                name: game.name,
+                platforms: platformas,
+                image: game.background_image,
+                releaseDate: game.released,
+                rating: game.rating
+            })
+        })
         console.log("Se ejecuta el controller de videogames")
-        resultado = [...gameBd, gameApi];
+        resultado = [...gameBd, ...gameApi];
         return res.status(200).json(resultado); 
         
         
@@ -34,20 +52,10 @@ async function getVideogames(req, res){
 
 }
 
-function clearArray(a){
-    resultado = []
-    a.map((game) =>{
-        resultado.push({
-            id: game.id,
-            name: game.name,
-            description: game.description,
-            platforms: game.platforms,
-            image: game.background_image,
-            releaseDate: game.released,
-            rating: game.rating
-        })
-    })
-    return resultado;
-}
+
+
+
+
+
 
 module.exports = {getVideogames};

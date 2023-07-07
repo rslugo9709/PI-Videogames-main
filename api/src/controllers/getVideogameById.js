@@ -16,6 +16,7 @@ async function getVideogameById(req, res){
         
         //buscamos en la DB
         const bdGame =await buscarBD(id);
+        console.log(bdGame)
         if(bdGame){
             return bdGame;
         }
@@ -23,19 +24,34 @@ async function getVideogameById(req, res){
 
         //buscamos en la api
         const response = (await axios.get(`https://api.rawg.io/api/games/${id}?key=${KEY}`)).data
+        let plataformas= []
+        let generos= []
+        //return res.status(200).json(response);
         if(response){
+            response.platforms.map((elem) =>{
+                plataformas.push({
+                    name: elem.platform.name
+                })
+            })
+            response.genres.map((elem) =>{
+                generos.push({
+                    name: elem.name
+                })
+            })
             const vGame = {
                 id: response.id,
                 name: response.name,
                 description: response.description,
-                platforms: response.platforms,
+                platforms: plataformas,
+                //platforms: response.platforms,
+                genres: generos,
                 image: response.background_image,
                 releaseDate: response.released,
                 rating: response.rating,
             }
             return res.status(200).json(vGame);
         }else{
-            return res.status(404).json({message: "No existe ese personaje"})
+            return res.status(404).json({message: "No existe ese videojuego"})
         }
         
     } catch (error) {
