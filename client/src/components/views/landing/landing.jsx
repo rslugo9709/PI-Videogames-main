@@ -11,7 +11,7 @@ export default function Landing(){
             <div className={styles.smallContainer}>
             <img src={gif} className={styles.gif}/>
             <h1 className={styles.titulo}>Welcome to the arcade world!</h1>
-            <Link to={"/login"} className={styles.boton}>Enter</Link>
+            <Link to={"/home"} className={styles.boton}>INSERT COIN</Link>
             </div>
 
             

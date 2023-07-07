@@ -15,7 +15,10 @@ async function getVideogameById(req, res){
     try {
         
         //buscamos en la DB
-        console.log(buscarBD(id))
+        const bdGame =await buscarBD(id);
+        if(bdGame){
+            return bdGame;
+        }
         
 
         //buscamos en la api
