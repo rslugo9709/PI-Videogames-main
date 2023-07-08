@@ -42,7 +42,7 @@ async function getVideogames(req, res){
             })
         })
         console.log("Se ejecuta el controller de videogames")
-        resultado = [...gameBd, ...gameApi];
+        const resultado = [...gameBd, ...gameApi];
         return res.status(200).json(resultado); 
         
         
