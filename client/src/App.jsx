@@ -13,6 +13,7 @@ import NavBar from './components/blocks/nav/navbar';
 
 import Landing from './components/views/landing/landing';
 import Home from './components/views/home/home';
+import Detail from './components/views/details/details';
 
 function App() {
     
@@ -32,6 +33,7 @@ function App() {
         <Routes>
             <Route path='/' element={<Landing />}/>
             <Route path='/home' element={<Home />} />
+            <Route path='/videogame/:id' element={<Detail />}/>
         </Routes>
 
 

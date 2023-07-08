@@ -1,4 +1,5 @@
 nav{
+    
     width: 96%;
     display: flex;
     justify-content: flex-end;
@@ -20,6 +21,7 @@ nav{
     font-size: 20px;
     padding: 0 5px;
     height: 40px;
+    transition: 0.8s;
 
 }
 
@@ -32,6 +34,7 @@ nav{
 .links:hover{
     background-color: aliceblue;
     color: black;
-    border-radius: 20px;
-    
+    border-radius: 10px;
+    transition: 0.5s;
+
 }

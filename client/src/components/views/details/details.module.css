@@ -1,0 +1,36 @@
+.detailcontainer {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 60%;
+    border: solid 10px #000000;
+    margin: 0 auto;
+    
+    padding: 15px;
+    border-radius: 20px;
+    color: #dadada;
+    background-color: #0000007f;
+  }
+  
+  .details {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .details div {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+  
+  .details p {
+    margin-left: 30px;
+  }
+  
+  .imagen{
+
+    width: 40%;
+    height: 40%;
+  }
