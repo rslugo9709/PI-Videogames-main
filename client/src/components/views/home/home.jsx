@@ -1,12 +1,15 @@
+import Cards from "../../blocks/cards/cards";
 import styles from "./home.module.css";
 
 
-export default function Home(){
-    let ver = true;
+function Home({videogames}){
+    console.log("imprimimos desde home")
+    console.log(videogames)
     return(
         <div >
-            <h1>This is the home page</h1>
+            <Cards videogames={videogames}/>
         </div>
     )
 
 }
+export default Home;

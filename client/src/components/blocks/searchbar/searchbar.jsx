@@ -10,7 +10,7 @@ export default function SearchBar(props) {
    //esto hace que no se borre la informacion en la barra de busqueda
    const handleChange =(e) => {
       const { value } = e.target;
-      console.log(value)
+      //console.log(value)
       setVideogame(value)
       }
    

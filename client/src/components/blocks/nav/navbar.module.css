@@ -1,20 +1,20 @@
 nav{
     
-    width: 96%;
+    width: 97%;
     display: flex;
     justify-content: flex-end;
     background-color: rgba(0, 0, 0, 0.945);
     height: 20%;
-    padding: 20px;
+    padding: 17px;
     margin-bottom: 20px;
     border-style: solid;
-    border-color: white;
-    border-radius: 15px;
+    border-bottom-color: white;
 
 
 }
 
 .links{
+    position: relative;
     text-decoration: none;
     color: white;
     font-weight: bold;
@@ -30,6 +30,8 @@ nav{
     justify-content: space-around;
     
 }
+
+
 
 .links:hover{
     background-color: aliceblue;

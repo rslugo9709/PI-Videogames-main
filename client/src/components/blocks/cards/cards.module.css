@@ -1,0 +1,9 @@
+.container{
+    margin-left: 5px;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    column-gap: 30px;
+    row-gap: 20px;
+    
+    
+}
