@@ -2,7 +2,7 @@ const axios = require("axios");
 const { Op } = require('sequelize');
 require('dotenv').config();
 const {KEY} = process.env;
-
+const {Videogame, Genres} = require("../db");
 
 
 async function getVideoGameByName(req, res){
@@ -11,7 +11,14 @@ async function getVideoGameByName(req, res){
     const url = `https://api.rawg.io/api/games?search=${fName}&key=${KEY}&pageSize=15`
     try {
         //buscamos en la base de datos primero
-        const bdGames = null
+        const bdGames = await Videogame.findAll({
+            where: {
+                name:{
+                    [Op.iLike]: `%${fName}%`
+                }
+            },
+            limit: 15
+        })
 
         //buscamos en la API
         const result= (await axios.get(url)).data.results
@@ -20,7 +27,7 @@ async function getVideoGameByName(req, res){
         if(bdGames){
             console.log("se envia el resultado con los de bd")
             const resultadoJ = [...bdGames,...apiGames]
-            return resultadoJ;
+            return res.status(200).json(resultadoJ);
         }
 
         return res.status(200).json(apiGames)

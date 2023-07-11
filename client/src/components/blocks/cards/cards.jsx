@@ -4,8 +4,8 @@ import styles from "./cards.module.css"
 
 function Cards(props) {
     const { videogames, onClose } = props;
-    console.log("imprimimos desde cards")    
-    console.log(videogames)
+    //console.log("imprimimos desde cards")    
+    //console.log(videogames)
     return (
       
       
@@ -16,6 +16,7 @@ function Cards(props) {
              key = {game.id}
              name={game.name}
              image={game.image}
+             genres={game.genres}
              id={game.id}
              rating={game.rating}
              releaseDate={game.releaseDate}

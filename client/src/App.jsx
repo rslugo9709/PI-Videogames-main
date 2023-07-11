@@ -16,14 +16,37 @@ import Home from './components/views/home/home';
 import Detail from './components/views/details/details';
 
 function App() {
+    //la funcion vizualizar determina si se renderizan todas las cartas, o solo las que estan llamadas desde la funcion id. 
+    const [visualizar, setVizualizar] = useState(false);
+  
     const [videogames, setVideogames] = useState([]);
+    const [allgames, setAllgames] = useState([]);
     const location = useLocation();
 
+
+
+    //Para desplegar todos los juegos
     //funcion que permite capturar lo que escribe el usuario
     function changeHandler(e){
         e.preventDefault();
   
     }
+
+    //busqueda inicial de cartas
+    async function allHandler(){
+      console.log("se ejecuta all handler")
+
+      try {
+        console.log("se trae la data del back")
+        let response = (await axios.get(`http://localhost:3001/videogames`)).data;
+        //console.log(response)
+        setAllgames(response)
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+
     //buscar por id
     async function searchHandler(id) {
         console.log("se ejecuta la funcion buscar")
@@ -31,7 +54,7 @@ function App() {
         console.log(id)
         try {
           //console.log(filtered)
-          console.log(videogames)
+          //console.log(videogames)
           let found = false;
           if(videogames.length==0){
             found = false;
@@ -41,11 +64,8 @@ function App() {
             ); 
           }
 
-           
-            
-            
-            console.log("comprobamos el found")
-            console.log(found)
+            //console.log("comprobamos el found")
+            //console.log(found)
             
           if (!(found)) {
             console.log("entra en el condicional para buscar")
@@ -55,6 +75,7 @@ function App() {
             if (response.name) {
               //console.log(response.name)
               setVideogames([...videogames, response]);
+              setVizualizar(true);
             }
           } else {
             alert("Ya buscaste este juego!");
@@ -66,6 +87,15 @@ function App() {
 
       console.log("se imprime videogames")
       console.log(videogames)
+
+      if(!visualizar){
+        //allHandler();
+        console.log("se debe ejecutar el allhandler aqui")
+      }
+      console.log("se imprime all games")
+      console.log(allgames)
+      let data = [];
+      
     return(
         <div className='App'>
             <div>

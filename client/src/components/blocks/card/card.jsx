@@ -6,6 +6,17 @@ import style from "./card.module.css"
 
 
 function Card(props){
+    
+    let generos = "";
+    for(let i = 0; i < props.genres.length ; i++){
+        //console.log(generos)
+
+        generos += props.genres[i].name;
+        if(i==props.genres.length -1){
+            break
+        }
+        generos += ", "
+    }
     return(
     <div className={style.card}>
         
@@ -13,8 +24,10 @@ function Card(props){
          <Link to={`/videogame/${props.id}`}>
          <h2  className={style.link}>{props.name}</h2>
          </Link>
-         <h2>{props.rating}</h2>
-         <h2>{props.releaseDate}</h2>
+         <h2 className={style.generos}>Genres:</h2>
+         <div className={style.generos}>
+        <p >{generos}</p>
+         </div>
          
         </div>
 
