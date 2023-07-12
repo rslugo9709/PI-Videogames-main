@@ -3,6 +3,8 @@
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    font-family:'Courier New', Courier, monospace;
+    margin-right: 10px;
 }
 
 .buscador{
@@ -14,6 +16,7 @@
     border-radius: 10px;
     height: 30px;
     transition: 0.5s;
+    font-family:'Courier New', Courier, monospace;
 }
 
 .buscador:hover{
@@ -28,6 +31,7 @@
 
 .agregar{
     /*font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;*/
+    font-family:'Courier New', Courier, monospace;
     font-size: 14px;
     height: 30px;
     color: white;

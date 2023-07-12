@@ -1,7 +1,9 @@
-import { FILTER, ORDER, RESET } from "../actions/actions";
+import { VIDEOGAMES,FILTER, ORDER, RESET } from "../actions/actions";
 
 let initialState= {
-    allVideogames: [],
+    videogames: [],
+    gamesId:[],
+    gamesName:[],
     mockVideogames: []
 }
 
@@ -9,20 +11,28 @@ let initialState= {
 function reducer(state= initialState, action){
 
     switch(action.type){
+
+        case VIDEOGAMES:
+            return{
+                ...state, 
+                videogames: action.payload
+            }
+
+
         case FILTER:
             return{
                 ...state,
-                mockVideogames: state.allVideogames.filter(
-                    (char) => char.gender === action.payload
+                mockVideogames: state.videogames.filter(
+                    (game) => game.genre === action.payload
                 )
             }
         case ORDER:
             //CAMBIAR ESTO
             let ordenados = [];
             if (action.payload === "Ascendente") {
-              ordenados = state.allVideogames.sort((a, b) => (a.id > b.id ? 1 : -1));
+              ordenados = state.videogames.sort((a, b) => (a.id > b.id ? 1 : -1));
             } else {
-              ordenados = state.allVideogames.sort((a, b) => (b.id > a.id ? 1 : -1));
+              ordenados = state.videogames.sort((a, b) => (b.id > a.id ? 1 : -1));
             }
             return {
               ...state,

@@ -6,17 +6,26 @@ import style from "./card.module.css"
 
 
 function Card(props){
-    
+    //console.log("imprimimos desde card");
+    //console.log(props)
     let generos = "";
-    for(let i = 0; i < props.genres.length ; i++){
-        //console.log(generos)
-
-        generos += props.genres[i].name;
-        if(i==props.genres.length -1){
-            break
+    //console.log("se imprimen las props de generos");
+    //console.log(props.genres);
+    if(props.genres){
+        for(let i = 0; i < props.genres.length ; i++){
+            //console.log(generos)
+    
+            generos += props.genres[i].name;
+            //console.log(props.genres[i].name)
+            if(i==props.genres.length -1){
+                break
+            }
+            generos += ", "
         }
-        generos += ", "
+
     }
+    //console.log("se imprime generos");
+    //console.log(generos)
     return(
     <div className={style.card}>
         
