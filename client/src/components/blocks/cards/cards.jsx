@@ -4,8 +4,10 @@ import styles from "./cards.module.css"
 
 function Cards(props) {
     const { videogames, onClose } = props;
-    //console.log("imprimimos desde cards")    
-    //console.log(videogames)
+    console.log("imprimimos desde cards")    
+    console.log(videogames)
+
+
     return (
       
       

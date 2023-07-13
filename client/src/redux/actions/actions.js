@@ -4,6 +4,7 @@ export const FILTER = "FILTER";
 export const ORDER = "ORDER";
 export const RESET = "RESET";
 export const VIDEOGAMES= "VIDEOGAMES";
+export const GAMENAME= "GAMENAME";
 
 
 export function getVideogames(){
@@ -20,6 +21,25 @@ export function getVideogames(){
           alert(error.message);
         }
     }
+}
+
+
+export function getGame(game){
+
+    return async function(dispatch){
+        try {
+
+            console.log("se ejecuta la busqueda del juego por nombre");
+            let response = (await axios.get(`http://localhost:3001/videogames/name/?name=${game}`)).data;
+        
+            dispatch({type:GAMENAME,payload:response})
+        } catch (error) {
+            alert(error.message);
+        }
+
+    }
+
+
 }
 export function orderCards(order){
     return{

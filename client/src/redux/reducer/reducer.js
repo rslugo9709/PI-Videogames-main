@@ -1,4 +1,4 @@
-import { VIDEOGAMES,FILTER, ORDER, RESET } from "../actions/actions";
+import { GAMENAME,VIDEOGAMES,FILTER, ORDER, RESET } from "../actions/actions";
 
 let initialState= {
     videogames: [],
@@ -15,10 +15,14 @@ function reducer(state= initialState, action){
         case VIDEOGAMES:
             return{
                 ...state, 
-                videogames: action.payload
+                videogames: action.payload,
             }
-
-
+        case GAMENAME:
+            return{
+                ...state,
+                videogames: action.payload,
+            }
+            //hacer llamado implicito
         case FILTER:
             return{
                 ...state,

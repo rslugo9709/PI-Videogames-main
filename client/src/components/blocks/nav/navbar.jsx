@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import styles from "./navbar.module.css";
 import SearchBar from "../searchbar/searchbar";
 import control from "../../../assets/control.png"
-export default function NavBar({onSearch, onChange}){
+export default function NavBar(){
 
     return(
         <div>
@@ -20,7 +20,7 @@ export default function NavBar({onSearch, onChange}){
 
                     <Link to={"/"} className={styles.links}>Exit </Link>
                 </div>
-                <SearchBar onSearch={onSearch} />
+                <SearchBar />
             </nav>
         </div>
     )
