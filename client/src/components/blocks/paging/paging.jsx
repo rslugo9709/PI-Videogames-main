@@ -1,22 +1,29 @@
 import React from "react";
 import Cards from "../cards/cards";
 import { useState } from "react";
+import styles from "./paging.module.css"
+function Paging({totalPost, cardsPerPage, setCurrentPage, currentPage}){
+    let pages = [];
 
-function Paging(props){
-    const {videogames} = props;
+    for (let i= 1; i <= Math.ceil(totalPost/cardsPerPage); i++){
+        pages.push(i);
+    }
+    
     //console.log("se imprime desde paging");
     //console.log(videogames)
     
 
     return (
-        <div>
-            <h1>Welcome to the largest videogame database</h1>
-            <button onClick={props.prevHandler}>Prev</button>
-            <button onClick={props.nextHandler} >Next</button>
-            <p>Game page {props.current}</p>
-
-
-            <Cards videogames={videogames}/>
+        <div className={styles.pagination}>
+            {pages.map((page, index) =>{
+                let boton = ""
+                if(page === currentPage){
+                    boton = styles.active
+                }else{
+                    boton= styles.boton;
+                }
+                return <button key={index} className={boton} onClick={() => setCurrentPage(page)}> {page}</button>
+            })}
         </div>
     )
 

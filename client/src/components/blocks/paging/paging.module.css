@@ -1,0 +1,36 @@
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 10px;
+}
+.boton {
+    width: 40px;
+    height: 40px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    
+    background: transparent;
+    color: #eee;
+    border-color: #eee;
+}
+.boton:hover{
+    border-color: #101010;
+    background: white;
+    color: #101010;
+
+}
+.active {
+    width: 40px;
+    height: 40px;
+    font-family: inherit;
+    font-weight: 900;
+    border-color: #101010;
+    background: #5a2a97;
+    color: #ffffff;
+}
