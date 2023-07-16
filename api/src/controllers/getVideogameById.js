@@ -66,11 +66,14 @@ async function getVideogameById(req, res){
 
 async function buscarBD(id){
     try {
-        const videogame = await Videogame.findOne({
+        const videogame = (await Videogame.findOne({
             where:{
                 id: id
             }
-        })
+        })).dataValues
+        console.log("se imprime el videogameDB de id: " + id)
+        console.log(videogame)
+
         return videogame;
     } catch (error) {
         return null;

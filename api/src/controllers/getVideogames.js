@@ -20,8 +20,19 @@ async function getVideogames(req, res){
 
         const gameBd = await Videogame.findAll();
         //buscamos en la api
-        let url = `https://api.rawg.io/api/games?key=${KEY}`;
-        const response = (await axios.get(url)).data.results;
+        //como la api solo trae un maximo de 40 resultados, dividimos
+        let url1 = `https://api.rawg.io/api/games?page_size=40&page=1&key=${KEY}`;
+        let url2 = `https://api.rawg.io/api/games?page_size=40&page=2&key=${KEY}`;
+        let url3 = `https://api.rawg.io/api/games?page_size=40&page=3&key=${KEY}`;
+        //llamamos cada parte  
+        const response1 = (await axios.get(url1)).data.results;
+        const response2 = (await axios.get(url2)).data.results;
+        const response3 = (await axios.get(url3)).data.results;
+        
+        const response =  response1.concat(response2).concat(response3);
+            
+
+        
         //return res.status(200).json(response);
         //let gameApi = clearArray(response);
         let gameApi = [];

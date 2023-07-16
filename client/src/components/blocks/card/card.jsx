@@ -24,12 +24,19 @@ function Card(props){
         }
 
     }
+    let image = "";
+    if(props.image  == "default.png" || props.image == "\\x64656661756c742e706e67"){
+        image = "https://i.blogs.es/15d29b/golden-sun-03/450_1000.webp";
+    }else{
+        image = props.image;
+    }
+
     //console.log("se imprime generos");
     //console.log(generos)
     return(
     <div className={style.card}>
         
-        <img className={style.imagenes} src={props.image} alt={props.name} />      
+        <img className={style.imagenes} src={image} alt={props.name} />      
          <Link to={`/videogame/${props.id}`}>
          <h2  className={style.link}>{props.name}</h2>
          </Link>

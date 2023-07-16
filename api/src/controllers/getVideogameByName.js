@@ -8,7 +8,7 @@ const {Videogame, Genres} = require("../db");
 async function getVideoGameByName(req, res){
     const {name} = req.query;
     const fName= name.toLowerCase()
-    const url = `https://api.rawg.io/api/games?search=${fName}&key=${KEY}&pageSize=15`
+    const url = `https://api.rawg.io/api/games?search=${fName}&key=${KEY}&page_size=15`
     try {
         //buscamos en la base de datos primero
         const bdGames = await Videogame.findAll({

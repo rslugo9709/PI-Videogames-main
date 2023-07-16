@@ -6,9 +6,11 @@ import styles from "./details.module.css";
 
 function Detail(){
     const {id} = useParams();
+    console.log(id)
     const [game, setGame] = useState([]);
     //const game = getGame(id);
     //console.log(game);
+
     useEffect(() => {
         fetch(`http://localhost:3001/videogame/${id}`)
           .then((response) => response.json())
@@ -24,6 +26,7 @@ function Detail(){
           });
         return setGame({});
       }, [id]);
+      console.log(game);
     return (
       <div className={styles.detailcontainer} id={game.id}>
         <div className="img-container">

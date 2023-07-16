@@ -58,8 +58,8 @@ function App() {
 
 
       
-    console.log("se imprime la data")
-     console.log(data)
+    //console.log("se imprime la data")
+    //console.log(data)
 
 
 
