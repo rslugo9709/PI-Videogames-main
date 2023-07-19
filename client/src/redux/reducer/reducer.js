@@ -1,9 +1,13 @@
-import { GAMENAME,VIDEOGAMES,FILTER, ORDER, RESET } from "../actions/actions";
+import { GAMENAME,VIDEOGAMES,FILTER, ORDER, RESET, GENRES, SEARCHED, DBGAMES, APIGAMES } from "../actions/actions";
 
 let initialState= {
     videogames: [],
+    buscado: false,
     gamesId:[],
+    generos: [],
     gamesName:[],
+    gamesBD: [],
+    gamesApi: [],
     mockVideogames: []
 }
 
@@ -16,6 +20,17 @@ function reducer(state= initialState, action){
             return{
                 ...state, 
                 videogames: action.payload,
+                mockVideogames: action.payload,
+            }
+        case DBGAMES:
+            return{
+                ...state,
+                gamesApi: action.payload
+            }
+        case APIGAMES:
+            return{
+                ...state,
+                gamesBD: action.payload
             }
         case GAMENAME:
             return{
@@ -23,31 +38,78 @@ function reducer(state= initialState, action){
                 videogames: action.payload,
             }
             //hacer llamado implicito
-        case FILTER:
+
+        case SEARCHED:
+            if(state.buscado){
+                return{
+                    ...state,
+                    buscado: false
+                }
+            }else{
+                return{
+                    ...state,
+                    buscado: true
+                }
+            }
+
+        case GENRES:
             return{
                 ...state,
-                mockVideogames: state.videogames.filter(
-                    (game) => game.genre === action.payload
-                )
+                generos: action.payload,
+            }
+        case FILTER:
+            console.log("se imprime desde el reducer el filtro por genero");
+            console.log(action.payload)
+            state.mockVideogames.map(
+                (game) => console.log(game))
+            return{
+                ...state,
+                videogames: state.mockVideogames
             }
         case ORDER:
             //CAMBIAR ESTO
             let ordenados = [];
-            if (action.payload === "Ascendente") {
-              ordenados = state.videogames.sort((a, b) => (a.id > b.id ? 1 : -1));
-            } else {
-              ordenados = state.videogames.sort((a, b) => (b.id > a.id ? 1 : -1));
+            
+            
+            if (action.payload === "low") {
+              ordenados = state.videogames.sort((a, b) => (a.rating > b.rating ? 1 : -1));
+            } else  if (action.payload === "high"){
+              ordenados = state.videogames.sort((a, b) => (b.rating > a.rating ? 1 : -1));
+            }else  if (action.payload === "ascendente"){
+                ordenados = state.videogames.sort((a, b) => {
+                    if (a.name < b.name) {
+                        return -1;
+                      }
+                      if (a.name > b.name) {
+                        return 1;
+                      }
+                      return 0;
+                });
+            }else  if (action.payload === "descendente"){
+                ordenados = state.videogames.sort((a, b) => {
+                    if (a.name > b.name) {
+                        return -1;
+                      }
+                      if (a.name < b.name) {
+                        return 1;
+                      }
+                      return 0;
+                });
+            }else{
+                console.log("se envia lo original")
+                return {...state,
+                    videogames: state.mockVideogames
+                }
             }
             return {
               ...state,
-              mockVideogames: [...ordenados],
+              videogames: [...ordenados],
             };
         
         case RESET:
-            
             return{
                     ...state,
-                    mockVideogames: state.allVideogames
+                    videogames: state.mockVideogames
                 }
         default:
             return{

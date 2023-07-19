@@ -13,12 +13,15 @@ const {KEY} = process.env;
 
 async function getVideogames(req, res){
 
+    const {src} = req.query;
 
-    //let url = `https://api.rawg.io/api/games?key=${KEY}&dates=2019-09-01,2019-09-30&platforms=18,1,7`;
     try {
         //llamamos a la base de datos
 
         const gameBd = await Videogame.findAll();
+        if(src ==="db"){
+            return res.status(200).json(gameBd);
+        }
         //buscamos en la api
         //como la api solo trae un maximo de 40 resultados, dividimos
         let url1 = `https://api.rawg.io/api/games?page_size=40&page=1&key=${KEY}`;
@@ -30,7 +33,10 @@ async function getVideogames(req, res){
         const response3 = (await axios.get(url3)).data.results;
         
         const response =  response1.concat(response2).concat(response3);
-            
+        
+        if(src=== "api"){
+            return res.status(200).json(response);
+        }
 
         
         //return res.status(200).json(response);

@@ -1,7 +1,7 @@
 import styles from "./search.module.css";
 import { useState, useEffect, useReducer } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getVideogames, getGame } from '../../../redux/actions/actions';
+import { getVideogames, getGame, buscar } from '../../../redux/actions/actions';
 
 
 export default function SearchBar(props) {
@@ -14,7 +14,10 @@ export default function SearchBar(props) {
       //console.log(value)
       setVideogame(value)
       if(!value.length){
-         dispatch(getVideogames())
+         dispatch(buscar());
+         dispatch(getVideogames());
+         
+         
      }
       }
    
@@ -22,7 +25,10 @@ export default function SearchBar(props) {
    
    //Debemos hacer el dispatch para los names
    const onSearch = (videogame) =>{
-      dispatch(getGame(videogame))
+      dispatch(buscar());
+      dispatch(getGame(videogame));
+      
+      
    }
    return (
       <div className={styles.container}>
