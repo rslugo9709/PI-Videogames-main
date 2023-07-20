@@ -65,6 +65,7 @@ function reducer(state= initialState, action){
             console.log(action.payload)
             if(action.payload !== "all"){
                 const genreA = []
+                //tocó a la antigua xd
                 for (let index = 0; index < state.mockVideogames.length; index++) {
                     if(state.mockVideogames[index].genres){
                         for (let j = 0; j < state.mockVideogames[index].genres.length; j++) {
@@ -81,10 +82,10 @@ function reducer(state= initialState, action){
                     ...state,
                     videogames: genreA
                 }
-            }else{
+            }else if(action.payload == "all"){
                 return{
                     ...state,
-                    //videogames: state.mockVideogames
+                    videogames: state.mockVideogames
                 }
             }
 
