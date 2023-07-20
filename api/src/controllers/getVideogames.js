@@ -20,6 +20,7 @@ async function getVideogames(req, res){
 
         const gameBd = await Videogame.findAll();
         if(src ==="db"){
+            console.log("se envian solo los de la base de datos")
             return res.status(200).json(gameBd);
         }
         //buscamos en la api
@@ -34,9 +35,7 @@ async function getVideogames(req, res){
         
         const response =  response1.concat(response2).concat(response3);
         
-        if(src=== "api"){
-            return res.status(200).json(response);
-        }
+
 
         
         //return res.status(200).json(response);
@@ -66,6 +65,10 @@ async function getVideogames(req, res){
                 rating: game.rating
             })
         })
+        if(src=== "api"){
+            console.log("se envia los videojuegos de la api")
+            return res.status(200).json(gameApi);
+        }
         console.log("Se ejecuta el controller de videogames")
         const resultado = [...gameApi,...gameBd];
         return res.status(200).json(resultado); 

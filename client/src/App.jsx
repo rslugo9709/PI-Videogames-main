@@ -44,10 +44,7 @@ function App() {
       //console.log("se inician pruebas con el reducer");
       //se carga la data al redux
       //se cargan los juegos
-      useEffect(() =>{
-        
-        dispatch(getVideogames());
-      }, [dispatch]);
+
       //cargamos al redux los videojuegos de la api
       useEffect(() =>{
         dispatch(getVideogames("api"));
@@ -58,6 +55,11 @@ function App() {
         dispatch(getVideogames("db"));
       }, [dispatch]);
 
+      //ahora cargamos todos
+      useEffect(() =>{
+        
+        dispatch(getVideogames("all"));
+      }, [dispatch]);
       //se cargan los generos
       useEffect(() =>{
         dispatch(getGenres());

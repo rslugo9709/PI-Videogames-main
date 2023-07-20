@@ -9,6 +9,8 @@ export const GENRES = "GENRES";
 export const SEARCHED = "SEARCHED";
 export const DBGAMES = "DBGAMES";
 export const APIGAMES = "APIGAMES";
+export const GETDB = "GETDB";
+export const GETAPI = "GETAPI";
 
 export function buscar(){
     console.log("se cambia el estado de buscado")
@@ -16,7 +18,7 @@ export function buscar(){
         type: "SEARCHED",
 
     }
-}
+};
 
 
 
@@ -30,16 +32,22 @@ export function getVideogames(source){
           //console.log("se trae la data del back")
           //definimos que ruta tomará segun lo que llegue de props
           let response= "";
-          if(!source){
+          if(source === "all"){
+            console.log("se traen los juegos api + db")
             response = (await axios.get(`http://localhost:3001/videogames/`)).data;
+            dispatch({type:VIDEOGAMES,payload:response})
           }else if(source === "api"){
+            console.log("se traen solo los api")
             response = (await axios.get(`http://localhost:3001/videogames/?src=${"api"}`)).data;
-          }else{
+            dispatch({type:APIGAMES,payload:response})
+          }else if(source === "db"){
+            console.log("se traen solo los juegos de las bd")
             response = (await axios.get(`http://localhost:3001/videogames/?src=${"db"}`)).data;
+            dispatch({type:DBGAMES,payload:response})
           }
 
           //console.log(response)
-          dispatch({type:VIDEOGAMES,payload:response})
+          
         } catch (error) {
           alert(error.message);
         }
@@ -66,6 +74,20 @@ export function getGame(game){
 
 
 }
+
+
+export function getDbGames(){
+    return{
+        type: "GETDB"
+    }
+}
+
+export function getApi(){
+    return{
+        type: "GETAPI"
+    }
+}
+
 
 export function getGenres(){
 

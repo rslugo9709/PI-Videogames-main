@@ -1,4 +1,4 @@
-import { GAMENAME,VIDEOGAMES,FILTER, ORDER, RESET, GENRES, SEARCHED, DBGAMES, APIGAMES } from "../actions/actions";
+import { GAMENAME,VIDEOGAMES,FILTER, ORDER, RESET, GENRES, SEARCHED, DBGAMES, APIGAMES, GETAPI, GETDB } from "../actions/actions";
 
 let initialState= {
     videogames: [],
@@ -25,13 +25,16 @@ function reducer(state= initialState, action){
         case DBGAMES:
             return{
                 ...state,
-                gamesApi: action.payload
+                videogames: action.payload,
+                gamesBD: action.payload
             }
         case APIGAMES:
             return{
                 ...state,
-                gamesBD: action.payload
+                videogames: action.payload,
+                gamesApi: action.payload
             }
+
         case GAMENAME:
             return{
                 ...state,
@@ -60,12 +63,31 @@ function reducer(state= initialState, action){
         case FILTER:
             console.log("se imprime desde el reducer el filtro por genero");
             console.log(action.payload)
-            state.mockVideogames.map(
-                (game) => console.log(game))
-            return{
-                ...state,
-                videogames: state.mockVideogames
+            if(action.payload !== "all"){
+                const genreA = []
+                for (let index = 0; index < state.mockVideogames.length; index++) {
+                    if(state.mockVideogames[index].genres){
+                        for (let j = 0; j < state.mockVideogames[index].genres.length; j++) {
+                            //console.log(state.videogames[index].genres[j].name)
+                            if(state.mockVideogames[index].genres[j].name === action.payload){
+                                genreA.push(state.mockVideogames[index]);
+                            }
+                        }
+                    }
+
+                    
+                }
+                return {
+                    ...state,
+                    videogames: genreA
+                }
+            }else{
+                return{
+                    ...state,
+                    //videogames: state.mockVideogames
+                }
             }
+
         case ORDER:
             //CAMBIAR ESTO
             let ordenados = [];

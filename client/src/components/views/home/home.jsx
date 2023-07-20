@@ -3,7 +3,7 @@ import styles from "./home.module.css";
 import Paging from "../../blocks/paging/paging";
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { filterGender, getVideogames, orderCards, reset } from "../../../redux/actions/actions";
+import { filterGender, getApi, getDbGames, getVideogames, orderCards, reset } from "../../../redux/actions/actions";
 
 
 function Home({videogames, genres, marcador}){
@@ -27,8 +27,16 @@ function Home({videogames, genres, marcador}){
         console.log("se ejecuta el filtro por generos");
         dispatch(filterGender(e.target.value));
     }
-    const handleFilter = (e) =>{
-        console.log("se ejecuta el filtro por locacion")
+    const handleOrigin = (e) =>{
+        console.log("se ejecuta el filtro por locacion");
+        if(e.target.value == "all"){
+            dispatch(getVideogames("all"))
+        }else if(e.target.value == "api"){
+            dispatch(getVideogames("api"));
+        }else{
+            dispatch(getDbGames("db"));
+        }
+        
     }
     const handleSort = (e) =>{
         console.log("se ejecuta el ordenamiento");
@@ -37,7 +45,7 @@ function Home({videogames, genres, marcador}){
 
     const handleReset = (e) =>{
         console.log("se ejecuta el reseteo")
-        dispatch(getVideogames())
+        dispatch(getVideogames("all"))
     }
         
   
@@ -51,17 +59,18 @@ function Home({videogames, genres, marcador}){
         )
     }else{
         //sino, es porque se quieren renderizar todos los videojuegos
+        console.log(currentCards);
         return(
             <div >
                 <div>
                     <select placeholder="Genre" onChange={handleFilterGenres}>
-                        <option value="All">All genres</option>
+                        <option value="all">All genres</option>
                         {genres.map(genero =>{
                             return <option key={genero.id} value={genero.name}>{genero.name}</option>
                         })}
                     </select>
-                    <select placeholder="Origin" onChange={handleFilter}>
-                        <option value="All">All games</option>
+                    <select placeholder="Origin" onChange={handleOrigin}>
+                        <option value="all">All games</option>
                         <option value="db">Database</option>
                         <option value="api">API</option>
                     </select>
