@@ -3,7 +3,7 @@ import styles from "./home.module.css";
 import Paging from "../../blocks/paging/paging";
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { filterGender, getApi, getDbGames, getVideogames, orderCards, reset } from "../../../redux/actions/actions";
+import { filterGender, getAllGames, getApi, getDbGames, getVideogames, orderCards, reset } from "../../../redux/actions/actions";
 
 
 function Home({videogames, genres, marcador}){
@@ -30,28 +30,34 @@ function Home({videogames, genres, marcador}){
     const handleOrigin = (e) =>{
         console.log("se ejecuta el filtro por locacion");
         if(e.target.value == "all"){
-            dispatch(getVideogames("all"))
+            dispatch(getAllGames())
         }else if(e.target.value == "api"){
-            dispatch(getVideogames("api"));
-        }else{
-            dispatch(getDbGames("db"));
+            dispatch(getApi());
+        }else if(e.target.value == "db"){
+            dispatch(getDbGames());
         }
         
     }
     const handleSort = (e) =>{
         console.log("se ejecuta el ordenamiento");
-        dispatch(orderCards(e.target.value));
+        if(e.target.value == "order"){
+            dispatch(getAllGames())
+        }else{
+            dispatch(orderCards(e.target.value));
+        }
+       
     }
 
     const handleReset = (e) =>{
         console.log("se ejecuta el reseteo")
+        window.alert("Se reestablece todo");
         dispatch(getVideogames("all"))
     }
         
   
     //Si lo recibido por props es de un tamaño de 15 elementos entonces es porque se quiere renderizar la ruta de name
     if(marcador){
-
+        console.log("entra en el marcador")
         return(
             <div >
                 <Cards videogames={videogames}/>

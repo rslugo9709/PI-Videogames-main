@@ -11,6 +11,8 @@ export const DBGAMES = "DBGAMES";
 export const APIGAMES = "APIGAMES";
 export const GETDB = "GETDB";
 export const GETAPI = "GETAPI";
+export const ALLGAMES = "ALLGAMES";
+export const GETPLAT = "GETPLAT"
 
 export function buscar(){
     console.log("se cambia el estado de buscado")
@@ -74,17 +76,21 @@ export function getGame(game){
 
 
 }
-
+export function getAllGames(){
+    return{
+        type: ALLGAMES
+    }
+}
 
 export function getDbGames(){
     return{
-        type: "GETDB"
+        type: GETDB
     }
 }
 
 export function getApi(){
     return{
-        type: "GETAPI"
+        type: GETAPI
     }
 }
 
@@ -106,6 +112,20 @@ export function getGenres(){
 
 }
 
+export function getPlats(){
+    return async function(dispatch){
+        console.log("se ejecuta el action de getPlats")
+
+        try {
+          //console.log("se trae la data del back")
+          let response = (await axios.get(`http://localhost:3001/platforms`)).data;
+          //console.log(response)
+          dispatch({type:GETPLAT,payload:response})
+        } catch (error) {
+          alert(error.message);
+        }
+    }
+}
 
 export function orderCards(order){
     return{
@@ -122,6 +142,8 @@ export function filterGender(gender){
 }
 
 export function reset(){
+    window.alert("Se reestablece todo");
+    
     return{
         type: "RESET"
     }

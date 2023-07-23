@@ -15,7 +15,7 @@ export default function SearchBar(props) {
       setVideogame(value)
       if(!value.length){
          dispatch(buscar());
-         dispatch(getVideogames());
+         dispatch(getVideogames("all"));
          
          
      }

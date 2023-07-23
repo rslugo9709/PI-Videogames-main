@@ -1,0 +1,60 @@
+.warning {
+    border: solid red 2px;
+    border-radius: 0.2em;
+  }
+.origin{
+    display: flex;
+    align-items:center;
+    justify-content: center;  
+    
+}
+.container{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.63);
+    color: white;
+}
+.formContainer{
+    border-radius: 3%;
+    background-color: aqua;
+}
+.formulario{
+    background-color: rgb(255, 255, 255);
+    width: 50%;
+    border-radius: 3%;
+    color: black;
+    
+    
+}
+.generos{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30% 30% 30% ;
+    column-gap: 10px;
+    row-gap: 10px;
+    align-items: center;
+}
+.danger {
+    
+    color: red;
+    
+}
+
+input, textarea { /*Hace que el input ocupe todo el width disponible */
+    width:200px;
+    
+    min-height: 2em;
+ }
+
+
+.enviar{
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}

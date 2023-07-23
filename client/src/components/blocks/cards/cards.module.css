@@ -4,6 +4,6 @@
     grid-template-columns: 22% 22% 22% 22%;
     column-gap: 30px;
     row-gap: 20px;
-    
+    align-items: center;
     
 }

@@ -1,10 +1,11 @@
-import { GAMENAME,VIDEOGAMES,FILTER, ORDER, RESET, GENRES, SEARCHED, DBGAMES, APIGAMES, GETAPI, GETDB } from "../actions/actions";
+import { GAMENAME,VIDEOGAMES,FILTER, ORDER, RESET, GENRES, SEARCHED, DBGAMES, APIGAMES, GETAPI, GETDB, ALLGAMES, GETPLAT } from "../actions/actions";
 
 let initialState= {
     videogames: [],
     buscado: false,
     gamesId:[],
     generos: [],
+    plataformas: [],
     gamesName:[],
     gamesBD: [],
     gamesApi: [],
@@ -25,16 +26,38 @@ function reducer(state= initialState, action){
         case DBGAMES:
             return{
                 ...state,
-                videogames: action.payload,
-                gamesBD: action.payload
+                gamesBD: action.payload,
             }
         case APIGAMES:
             return{
                 ...state,
-                videogames: action.payload,
-                gamesApi: action.payload
-            }
+                gamesApi: action.payload,
 
+            }
+        case ALLGAMES:
+            return{
+                ...state,
+                videogames: state.mockVideogames
+            }
+        case GETDB:
+            console.log("se deberian traer los juegos de la base de datos")
+            return{
+                ...state,
+                videogames: state.gamesBD,
+            }
+        case GETAPI:
+            console.log("se deberian traer los juegos de la api")
+            return{
+                ...state,
+                videogames: state.gamesApi,
+    
+            }
+        case GETPLAT:
+            console.log("se ejecuta el reducer de plataformas")
+            return{
+                ...state,
+                plataformas: action.payload
+            }
         case GAMENAME:
             return{
                 ...state,
@@ -118,11 +141,6 @@ function reducer(state= initialState, action){
                       }
                       return 0;
                 });
-            }else{
-                console.log("se envia lo original")
-                return {...state,
-                    videogames: state.mockVideogames
-                }
             }
             return {
               ...state,

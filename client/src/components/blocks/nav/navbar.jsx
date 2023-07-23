@@ -14,10 +14,8 @@ export default function NavBar(){
                 <div className= {styles.container}>
                     
                     <Link to={"/home"} className={styles.links}>Home</Link>
-                    <Link to={"/fav"} className={styles.links}>Add</Link>
+                    <Link to={"/add"} className={styles.links}>Add</Link>
                     <Link to={"/about"} className={styles.links}>About</Link>
-                    
-
                     <Link to={"/"} className={styles.links}>Exit </Link>
                 </div>
                 <SearchBar />

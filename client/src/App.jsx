@@ -2,10 +2,8 @@
 import { useState, useEffect, useReducer } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVideogames, getGame, getGenres, buscar } from './redux/actions/actions';
+import { getVideogames, getGame, getGenres, buscar, getPlats } from './redux/actions/actions';
 
-
-import axios from "axios";
 
 import './App.css'
 
@@ -18,7 +16,7 @@ import NavBar from './components/blocks/nav/navbar';
 import Landing from './components/views/landing/landing';
 import Home from './components/views/home/home';
 import Detail from './components/views/details/details';
-
+import Add from './components/views/newGame/new';
 function App() {
     //la funcion vizualizar determina si se renderizan todas las cartas, o solo las que estan llamadas desde la funcion id. 
     const [visualizar, setVizualizar] = useState(false);
@@ -29,6 +27,7 @@ function App() {
     const dispatch = useDispatch();
     let data =[];
     let generos = [];
+    let plataformas = [];
     let marcador = true; 
     //Para desplegar todos los juegos
     //funcion que permite capturar lo que escribe el usuario
@@ -57,7 +56,6 @@ function App() {
 
       //ahora cargamos todos
       useEffect(() =>{
-        
         dispatch(getVideogames("all"));
       }, [dispatch]);
       //se cargan los generos
@@ -65,6 +63,10 @@ function App() {
         dispatch(getGenres());
       }, [dispatch]);
       
+      //se cargan las plataformas
+      useEffect(() =>{
+        dispatch(getPlats());
+      }, [dispatch]);
 
 
 
@@ -73,6 +75,7 @@ function App() {
       data = useSelector(state => state.videogames);
       generos = useSelector(state => state.generos);
       marcador = useSelector(state => state.buscado);
+      plataformas = useSelector(state => state.plataformas);
       console.log("se imprime desde el condicional de visualizar el marcador")
       console.log(marcador);
     }
@@ -99,6 +102,7 @@ function App() {
         <Routes>
             <Route path='/' element={<Landing />}/>
             <Route path='/home'  element={<Home videogames={data} genres={generos} marcador= {marcador}/>} />
+            <Route path='/add' element={<Add genres={generos} plataformas={plataformas}/>} />
             <Route path='/videogame/:id' element={<Detail />}/>
         </Routes>
 
