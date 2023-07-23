@@ -69,7 +69,13 @@ async function buscarBD(id){
         const videogame = (await Videogame.findOne({
             where:{
                 id: id
-            }
+            },
+            include: [
+                {
+                    model: Genres,
+                    attributes: ["id", "name"]
+                }
+            ],
         })).dataValues
         console.log("se imprime el videogameDB de id: " + id)
         console.log(videogame)

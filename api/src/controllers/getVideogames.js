@@ -28,7 +28,20 @@ async function getVideogames(req, res){
         });
         if(src ==="db"){
             console.log("se envian solo los de la base de datos")
-            return res.status(200).json(gameBd);
+            let cleanBd= [];
+            gameBd.map((game) =>{
+                cleanBd.push({
+                    id: game.id,
+                    name: game.name,
+                    platforms: game.platforms,
+                    image: game.image,
+                    genres: game.Genres,
+                    releaseDate: game.releaseDate,
+                    rating: game.rating
+                })
+            })
+            
+            return res.status(200).json(cleanBd);
         }
         //buscamos en la api
         //como la api solo trae un maximo de 40 resultados, dividimos

@@ -17,15 +17,22 @@ async function getVideoGameByName(req, res){
                     [Op.iLike]: `%${fName}%`
                 }
             },
+            include: [
+                {
+                    model: Genres,
+                    attributes: ["id", "name"]
+                }
+            ],
             limit: 15
         })
-
+        
         //buscamos en la API
         const result= (await axios.get(url)).data.results
         const apiGames = clearGames(result);
         //return res.status(200).json(result)
         if(bdGames){
             console.log("se envia el resultado con los de bd")
+            console.log(bdGames);
             const resultadoJ = [...bdGames,...apiGames]
             return res.status(200).json(resultadoJ);
         }

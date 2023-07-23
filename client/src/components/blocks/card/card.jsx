@@ -11,6 +11,7 @@ function Card(props){
     let generos = "";
     //console.log("se imprimen las props de generos");
     //console.log(props.genres);
+    
     if(props.genres){
         for(let i = 0; i < props.genres.length ; i++){
             //console.log(generos)

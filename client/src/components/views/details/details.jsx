@@ -24,9 +24,10 @@ function Detail(){
           .catch((err) => {
             window.alert("Error al buscar");
           });
-        return setGame({});
+        return setGame({error: "no game found"});
       }, [id]);
       console.log(game);
+      console.log("se procede a buscar desde el reducer")
     return (
       <div className={styles.detailcontainer} id={game.id}>
         <div className="img-container">
