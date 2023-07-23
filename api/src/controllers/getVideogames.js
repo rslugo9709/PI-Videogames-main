@@ -18,7 +18,14 @@ async function getVideogames(req, res){
     try {
         //llamamos a la base de datos
 
-        const gameBd = await Videogame.findAll();
+        const gameBd = await Videogame.findAll({
+            include: [
+                {
+                    model: Genres,
+                    attributes: ["id", "name"]
+                }
+            ]
+        });
         if(src ==="db"){
             console.log("se envian solo los de la base de datos")
             return res.status(200).json(gameBd);

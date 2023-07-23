@@ -20,23 +20,29 @@
 }
 .formContainer{
     border-radius: 3%;
-    background-color: aqua;
+    background-color: rgba(52, 44, 140, 0.103);
+    width: 80%;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 .formulario{
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.495);
     width: 50%;
     border-radius: 3%;
-    color: black;
+    color: rgb(255, 255, 255);
     
     
+}
+.visualizar{
+    background-color: rgba(0, 0, 0, 0.361);
+    width: 50%;
+    border-radius: 3%;
 }
 .generos{
     width: 100%;
-    display: grid;
-    grid-template-columns: 30% 30% 30% ;
-    column-gap: 10px;
-    row-gap: 10px;
-    align-items: center;
+
 }
 .danger {
     

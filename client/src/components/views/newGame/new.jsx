@@ -2,8 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import styles from './new.module.css'
 
-// eslint-disable-next-line
-const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+
 
 export function validate( inputs ){
   let errors = {};
@@ -12,6 +11,17 @@ export function validate( inputs ){
   }
   if (!inputs.image.length) {
     errors.image = 'A valid URL is required';
+  }
+  if (!inputs.rating.length) {
+    errors.rating = 'A valid rating is required';
+  }else if(inputs.rating <0){
+    errors.rating = 'Rating cannot be less than 0';
+  }else if(inputs.rating >5  ){
+    errors.rating = 'Rating cannot be more than 5';
+  }
+
+  if(!inputs.releaseDate.length){
+    errors.releaseDate = "There must be a valid date"
   }
   if (!inputs.description.length) {
     errors.description = 'A valid description is required!';
@@ -30,8 +40,10 @@ export default function Add ({genres, plataformas}) {
     name:"",
     image: "",
     description:"",
-    rating: 0
-
+    
+    rating: 0,
+    plataformas: [],
+    generos: []
   })
 
   //seteamos el hook para el error
@@ -40,7 +52,10 @@ export default function Add ({genres, plataformas}) {
     name:"",
     image: "",
     description:"",
-    rating: 0
+    rating: "",
+    releaseDate: "",
+    plataformas: "",
+    generos: ""
 
   })
 
@@ -75,14 +90,23 @@ export default function Add ({genres, plataformas}) {
       setInputs({
         name:"",
         image: "",
-        description:""
+        releaseDate: "",
+        description:"",
+        rating: 0,
+        plataformas: [],
+        generos: []
       }
       )
 
       setErrors({
         name:"",
         image: "",
-        description:""
+        releaseDate: "",
+        description:"",
+        rating: 0,
+        plataformas: "",
+        generos: ""
+
       })
 
     }
@@ -98,31 +122,36 @@ export default function Add ({genres, plataformas}) {
 
 
         <label htmlFor='name'>Name:</label>
+        <br></br>
         <input onChange={handleInputChange} className={errors.name && styles.warning} type="text" value={inputs.name} name="name" id="name" placeholder='Name of the game...'/>
         <p className={styles.danger}>{errors.name}</p>
 
         <label htmlFor='image'>Image's URL:</label>
+        <br></br>
         <input onChange={handleInputChange} className={errors.image && "warning"} type="text" value={inputs.image} name="image" id="image" placeholder='www...'/>
-        <p className='danger'>{errors.image}</p>
+        <p className={styles.danger}>{errors.image}</p>
 
         <label htmlFor="description">Description:</label>
+        <br></br>
         <textarea 
           onChange={handleInputChange} className={errors.description && "warning"} type="text" value={inputs.description} name="description" id="description" placeholder='The game is about...' rows="3" cols="30">
           </textarea>
-        <p className='danger'>{errors.description}</p>
-
-        <br></br>
+        <p className={styles.danger}>{errors.description}</p>
         <br></br>
         <label htmlFor="release">Release date:</label>
-        <input
-          onChange={handleInputChange}  type="date" value={inputs.release} name="release" id="release" >
-        </input>
         <br></br>
+        <input
+          onChange={handleInputChange}  type="date" value={inputs.releaseDate} name="release" id="release" >
+        </input>
+        {console.log(inputs.releaseDate)}
+        <p className={styles.danger}>{errors.releaseDate}</p>
         <br></br>
         <label htmlFor="rating">Rating:</label>
+        <br></br>
         <input
           onChange={handleInputChange}  type="number" value={inputs.rating} name="rating" id="rating" placeholder='5'>
         </input>
+        <p className={styles.danger}>{errors.rating}</p>
         <br></br>
 
         <label htmlFor="">Genres </label>
@@ -130,18 +159,14 @@ export default function Add ({genres, plataformas}) {
         {//console.log("se imprime desde los generos")
         }
         <div className={styles.generos}>
-        {genres.map(genero =>{
-            //console.log(genero.name)
-            return (
-              <div key={`${genero.name}c`}>
-              <input type="checkbox" name={genero.id} key={genero.id} value={genero.name} onChange={handleInputChange} />
-              <label key={`${genero.name}l` }>{genero.name}</label>
-              </div>
-              )
-        
-                        })}
+              <select placeholder="Genre" onChange={handleInputChange}>
+              <option value="all">All genres</option>
+              {genres.map(genero =>{
+                  return <option key={genero.id} value={genero.name}>{genero.name}</option>
+                  })}
+              </select>
         </div>
-
+        <label htmlFor="">Platforms </label>          
         <div className={styles.plataformas}>
         <select placeholder="Plataforma" onChange={handleInputChange}>
             {plataformas.map(plat =>{
@@ -152,8 +177,19 @@ export default function Add ({genres, plataformas}) {
 
         <button className={styles.enviar} type='submit'>Create game!</button>
       </form>
+      <div className={styles.visualizar}>
+            <h2>Preview</h2>
+            <p>Name: {inputs.name}</p>
+            <p>Rating: {inputs.rating}</p>
+            <p>Description: </p>
+            <p>{inputs.description}</p>
+            <p>release date: </p>
+            <p>{inputs.releaseDate}</p>
       </div>
       </div>
+
+      </div>
+
     </div>
     
   

@@ -35,7 +35,7 @@ function Detail(){
         </div>
         <div className={styles.details}>
           <div>
-            <h3>rating:</h3>
+            <h3>rating: </h3>
             <p>{game.rating}</p>
           </div>
           <div>
