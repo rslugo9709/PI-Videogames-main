@@ -1,4 +1,4 @@
-import { GAMENAME,VIDEOGAMES,FILTER, ORDER, RESET, GENRES, SEARCHED, DBGAMES, APIGAMES, GETAPI, GETDB, ALLGAMES, GETPLAT } from "../actions/actions";
+import { GAMENAME,VIDEOGAMES,FILTER, ORDER, RESET, GENRES, SEARCHED, DBGAMES, APIGAMES, GETAPI, GETDB, ALLGAMES, GETPLAT, POSTGAME } from "../actions/actions";
 
 let initialState= {
     videogames: [],
@@ -64,7 +64,12 @@ function reducer(state= initialState, action){
                 videogames: action.payload,
             }
             //hacer llamado implicito
-
+        
+        case POSTGAME:
+            console.log("se creó el juego")
+            return{
+                ...state
+            }
         case SEARCHED:
             if(state.buscado){
                 return{

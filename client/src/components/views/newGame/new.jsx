@@ -2,8 +2,8 @@ import React from 'react'
 import { useState } from 'react';
 import styles from './new.module.css'
 import {validate} from "./validate"
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { createGame } from '../../../redux/actions/actions';
 
 export default function Add ({genres, plataformas}) {
 
@@ -24,8 +24,11 @@ export default function Add ({genres, plataformas}) {
   })
 
   const [aux, setAux] = useState({
-    sGeneros: ""
+    sGeneros: "",
+    sPlat: ""
   })
+
+  const dispatch = useDispatch();
 
   //seteamos el hook para el error
   const [errors, setErrors] = useState({
@@ -91,7 +94,12 @@ export default function Add ({genres, plataformas}) {
     console.log("se imprimen los generos");
     console.log(inputs.generos);
     console.log(inputs.generosId);
-
+    setErrors( 
+      (validate({
+        ...inputs,
+        [e.target.name]: e.target.value
+      }))
+    )
     //se intenta arreglar
     let sGeneros = "";
     if(inputs.generos){
@@ -133,7 +141,23 @@ export default function Add ({genres, plataformas}) {
     console.log(inputs.plataformas)
 
     //vamos a renderizarlo en el preview
-    
+    let sPlat = "";
+    if(inputs.plataformas){
+      for(let i = 0; i < inputs.plataformas.length ; i++){
+        //console.log(generos)
+
+        sPlat += inputs.plataformas[i];
+        //console.log(props.genres[i].name)
+        if(i==inputs.plataformas.length -1){
+            break
+        }
+        sPlat += ", "
+    }
+    setAux({
+      ...aux,
+      sPlat: sPlat
+    })
+    }
   }
 
   const handleSubmit = (e) =>{
@@ -144,12 +168,23 @@ export default function Add ({genres, plataformas}) {
       alert("Debe llenar todos los campos");
     }else{
       alert("Datos completos");
+      let info = {
+        name: inputs.name,
+        image: inputs.image,
+        description: inputs.description,
+        releaseDate: inputs.releaseDate,
+        rating: inputs.rating,
+        platforms: inputs.plataformas,
+        genres: inputs.generosId
+      }
+      console.log(info);
+      dispatch(createGame(info));
       setInputs({
         name:"",
         image: "",
         releaseDate: "",
         description:"",
-        rating: 0,
+        rating: "",
         plataformas: [],
         generos: []
       }
@@ -160,7 +195,7 @@ export default function Add ({genres, plataformas}) {
         image: "",
         releaseDate: "",
         description:"",
-        rating: 0,
+        rating: "",
         plataformas: "",
         generos: ""
 
@@ -252,6 +287,7 @@ export default function Add ({genres, plataformas}) {
             <p>Genres:</p>
             <p>{aux.sGeneros}</p>
             <p>Platforms:</p>
+            <p>{aux.sPlat}</p>
       </div>
       </div>
 

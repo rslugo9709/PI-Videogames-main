@@ -12,7 +12,8 @@ export const APIGAMES = "APIGAMES";
 export const GETDB = "GETDB";
 export const GETAPI = "GETAPI";
 export const ALLGAMES = "ALLGAMES";
-export const GETPLAT = "GETPLAT"
+export const GETPLAT = "GETPLAT";
+export const POSTGAME = "POSTGAME";
 
 export function buscar(){
     console.log("se cambia el estado de buscado")
@@ -126,6 +127,24 @@ export function getPlats(){
         }
     }
 }
+
+export function createGame(info){
+    return async function(dispatch){
+        console.log("se ejecuta el action de create form")
+        console.log(info)
+        try {
+          
+          let response = (await axios.post(`http://localhost:3001/videogames`, info));
+          //console.log(response)
+          dispatch({type:POSTGAME,payload:response})
+        } catch (error) {
+          alert(error.message);
+        }
+    }
+}
+
+
+
 
 export function orderCards(order){
     return{
