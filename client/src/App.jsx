@@ -17,6 +17,7 @@ import Landing from './components/views/landing/landing';
 import Home from './components/views/home/home';
 import Detail from './components/views/details/details';
 import Add from './components/views/newGame/new';
+import About from './components/views/about/about';
 function App() {
     //la funcion vizualizar determina si se renderizan todas las cartas, o solo las que estan llamadas desde la funcion id. 
     const [visualizar, setVizualizar] = useState(false);
@@ -103,6 +104,7 @@ function App() {
             <Route path='/' element={<Landing />}/>
             <Route path='/home'  element={<Home videogames={data} genres={generos} marcador= {marcador}/>} />
             <Route path='/add' element={<Add genres={generos} plataformas={plataformas}/>} />
+            <Route path='/about' element={<About />}/>
             <Route path='/videogame/:id' element={<Detail />}/>
         </Routes>
 
