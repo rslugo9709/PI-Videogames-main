@@ -31,6 +31,8 @@
   
   .imagen{
 
-    width: 50%;
+    width: 70%;
     height: 50%;
+    border-radius: 20px;
+    object-fit: cover;
   }

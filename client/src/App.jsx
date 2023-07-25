@@ -30,6 +30,7 @@ function App() {
     let generos = [];
     let plataformas = [];
     let marcador = true; 
+    let mock = [];
     //Para desplegar todos los juegos
     //funcion que permite capturar lo que escribe el usuario
     function changeHandler(e){
@@ -77,6 +78,7 @@ function App() {
       generos = useSelector(state => state.generos);
       marcador = useSelector(state => state.buscado);
       plataformas = useSelector(state => state.plataformas);
+      mock = useSelector(state => state.mockVideogames);
       console.log("se imprime desde el condicional de visualizar el marcador")
       console.log(marcador);
     }

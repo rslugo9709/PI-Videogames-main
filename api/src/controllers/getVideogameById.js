@@ -18,7 +18,7 @@ async function getVideogameById(req, res){
         const bdGame =await buscarBD(id);
         console.log(bdGame)
         if(bdGame){
-            return bdGame;
+            return res.status(200).json(bdGame);
         }
         
 
@@ -29,9 +29,9 @@ async function getVideogameById(req, res){
         //return res.status(200).json(response);
         if(response){
             response.platforms.map((elem) =>{
-                plataformas.push({
-                    name: elem.platform.name
-                })
+                plataformas.push(
+                    elem.platform.name
+                )
             })
             response.genres.map((elem) =>{
                 generos.push({
