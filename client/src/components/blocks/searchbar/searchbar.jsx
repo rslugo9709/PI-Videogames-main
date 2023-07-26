@@ -33,7 +33,7 @@ export default function SearchBar(props) {
    return (
       <div className={styles.container}>
 
-         <input className={styles.buscador} placeholder=" Busca aqui" type='search' onChange={handleChange} />
+         <input className={styles.buscador} placeholder=" Search here!" type='search' onChange={handleChange} />
 
          <button className={styles.agregar} onClick={() => onSearch(videogame)}>Search</button>
       </div>
